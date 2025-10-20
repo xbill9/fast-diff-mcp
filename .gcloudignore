@@ -1,0 +1,37 @@
+# This file is used by gcloud to exclude files from the source upload.
+# It is almost identical to .dockerignore, but MUST NOT ignore the Dockerfile.
+
+.gcloudignore
+.dockerignore
+
+# Ignore Git history
+.git/
+.gitignore
+
+# Ignore Rust build artifacts. The container will build its own.
+target/
+
+# Ignore Python virtual environment and cache
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore development tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.uv_cache/
+
+# Ignore mise local tool directory
+.mise/
+
+# Ignore IDE/editor configuration
+.vscode/
+.idea/
+*.swp
+
+.serena/
+# Ignore common temporary files and logs
+*.log
