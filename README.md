@@ -10,13 +10,15 @@ The core logic is implemented in Rust for maximum speed, offering a significant 
 
 ### Available Tools
 
--   **`diff_tool_rust_similar`** - Compares two multiline strings using a high-performance Rust implementation (the `similar` crate's Myers diff algorithm). This is the recommended tool for performance.
-    -   `original_text` (string, required): The original text content.
-    -   `modified_text` (string, required): The modified text content.
+- **`diff_tool_rust_similar`** - Compares two multiline strings using a high-performance Rust implementation (the `similar` crate's Myers diff algorithm). This is the recommended tool for performance.
 
--   **`diff_tool_python_difflib`** - Compares two multiline strings using the standard Python `difflib` library (Ratcliff/Obershelp algorithm). Useful for comparison or when `difflib`-specific behavior is required.
-    -   `original_text` (string, required): The original text content.
-    -   `modified_text` (string, required): The modified text content.
+  - `original_text` (string, required): The original text content.
+  - `modified_text` (string, required): The modified text content.
+
+- **`diff_tool_python_difflib`** - Compares two multiline strings using the standard Python `difflib` library (Ratcliff/Obershelp algorithm). Useful for comparison or when `difflib`-specific behavior is required.
+
+  - `original_text` (string, required): The original text content.
+  - `modified_text` (string, required): The modified text content.
 
 ### Installation & Usage
 
@@ -24,30 +26,33 @@ This project is a Python package with a Rust extension, so it requires a compila
 
 #### Prerequisites
 
--   Git
--   Python (>= 3.10)
--   [Rust Toolchain](https://www.rust-lang.org/tools/install)
--   [uv](https://github.com/astral-sh/uv) (for Python environment and package management)
+- Git
+- Python (>= 3.10)
+- [Rust Toolchain](https://www.rust-lang.org/tools/install)
+- [uv](https://github.com/astral-sh/uv) (for Python environment and package management)
 
 #### Running from Source
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/<your-username>/fast-diff-mcp.git
-    cd fast-diff-mcp
-    ```
+1. **Clone the repository:**
 
-2.  **Install dependencies and compile the extension:**
-    This command sets up a virtual environment and installs the package in editable mode.
-    ```bash
-    uv pip install -e .
-    ```
+   ```bash
+   git clone https://github.com/<your-username>/fast-diff-mcp.git
+   cd fast-diff-mcp
+   ```
 
-3.  **Run the server:**
-    From the root of the project directory, run:
-    ```bash
-    uv run server.py
-    ```
+1. **Install dependencies and compile the extension:**
+   This command sets up a virtual environment and installs the package in editable mode.
+
+   ```bash
+   uv pip install -e .
+   ```
+
+1. **Run the server:**
+   From the root of the project directory, run:
+
+   ```bash
+   uv run server.py
+   ```
 
 ### Configuration
 
@@ -73,8 +78,8 @@ Add the following to your Claude settings, replacing `/path/to/fast-diff-mcp` wi
   }
 }
 ```
-</details>
 
+</details>
 
 #### Configure for VS Code
 
@@ -100,14 +105,15 @@ Add the following JSON block to your User Settings (JSON) file or a `.vscode/mcp
   }
 }
 ```
-</details>
 
+</details>
 
 ### Benchmarking
 
 This repository includes a script to benchmark the performance of the Rust implementation against Python's `difflib`.
 
 To run the benchmark, execute the following command from the project root:
+
 ```bash
 uv run benchmark.py
 ```
@@ -119,10 +125,12 @@ This project is optimized for deployment to serverless platforms like Google Clo
 The most direct way to deploy is with the `gcloud` CLI, which will build the container and deploy it in a single step.
 
 **Prerequisites:**
--   [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) installed and authenticated (`gcloud auth login`).
--   A Google Cloud project with billing enabled and the Cloud Run API activated.
+
+- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) installed and authenticated (`gcloud auth login`).
+- A Google Cloud project with billing enabled and the Cloud Run API activated.
 
 **To deploy, run the following commands:**
+
 ```bash
 # 1. Set your project, region, and service name
 export PROJECT_ID="your-google-cloud-project-id"
@@ -139,6 +147,7 @@ gcloud run deploy $SERVICE_NAME \
   --region=$REGION \
   --source .
 ```
+
 After a few minutes, `gcloud` will provide a public URL for your service.
 
 ### Contributing
