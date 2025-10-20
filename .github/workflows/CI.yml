@@ -30,6 +30,12 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install uv
+        run: pip install uv
+
+      - name: Create venv
+        run: uv venv
+
       - name: Build and install Python package
         uses: PyO3/maturin-action@v1
         with:
