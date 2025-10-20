@@ -1,0 +1,60 @@
+# .github/workflows/CI.yml
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          components: "rust-src"
+        env:
+          SCCACHE_GHA_ENABLED: "true"
+          RUSTC_WRAPPER: "sccache"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv and create venv
+        run: |
+          pip install uv
+          uv venv
+          echo "VIRTUAL_ENV=$(pwd)/.venv" >> $GITHUB_ENV
+          echo "$(pwd)/.venv/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies and build
+        run: |
+          uv pip install -e '.[dev]'
+          maturin develop
+
+      - name: Run Rust tests
+        run: cargo test --verbose
+
+      - name: Check Python import and functionality
+        run: |
+          python -c "import fast_diff_mcp; assert '--- original' in fast_diff_mcp.unified_diff('a\nb', 'a\nc')"
+          
+      - name: Lint code with Ruff
+        run: |
+          pip install ruff
+          ruff check .
+          ruff format --check .

@@ -1,0 +1,36 @@
+# Ignore the Dockerfile itself and this file
+Dockerfile
+.dockerignore
+.gcloudignore
+
+# Ignore Git history
+.git/
+.gitignore
+
+# Ignore Rust build artifacts. The container will build its own.
+target/
+
+# Ignore Python virtual environment and cache
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore development tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.uv_cache/
+
+# Ignore mise local tool directory
+.mise/
+
+# Ignore IDE/editor configuration
+.vscode/
+.idea/
+*.swp
+
+.serena/
+# Ignore common temporary files and logs
+*.log
