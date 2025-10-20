@@ -33,15 +33,17 @@ jobs:
       - name: Install uv
         run: pip install uv
 
-      - name: Create venv
-        run: uv venv
+      - name: Create and activate venv
+        run: |
+          uv venv
+          echo "VIRTUAL_ENV=$(pwd)/.venv" >> $GITHUB_ENV
+          echo "$(pwd)/.venv/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: uv pip install -e '.[dev]'
 
       - name: Build and install Python package
-        uses: PyO3/maturin-action@v1
-        with:
-          command: develop
-          sccache: 'true'
-          args: --extras dev
+        run: maturin develop
 
       - name: Run Rust tests
         run: cargo test --verbose
