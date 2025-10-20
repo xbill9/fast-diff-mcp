@@ -58,6 +58,29 @@ This project is a Python package with a Rust extension, so it requires a compila
 
 To use this server with an MCP client, you must configure the client to run the server from your local clone of this repository. **The commands below assume you are running them from the root of the cloned `fast-diff-mcp` directory.**
 
+#### Configure for Gemini CLI
+
+Add the following to your `~/.gemini/settings.json` file, replacing `/path/to/fast-diff-mcp` with the absolute path to where you cloned the repository.
+
+<details>
+<summary>Using uv (from source)</summary>
+
+```json
+{
+  "mcpServers": {
+    "diff": {
+      "command": "uv",
+      "args": ["run", "server.py"],
+      "options": {
+        "cwd": "/path/to/fast-diff-mcp"
+      }
+    }
+  }
+}
+```
+
+</details>
+
 #### Configure for Claude.app
 
 Add the following to your Claude settings, replacing `/path/to/fast-diff-mcp` with the absolute path to where you cloned the repository.
