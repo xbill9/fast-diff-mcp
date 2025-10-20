@@ -36,7 +36,7 @@ This project is a Python package with a Rust extension, so it requires a compila
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/<your-username>/fast-diff-mcp.git
+   git clone https://github.com/kweinmeister/fast-diff-mcp.git
    cd fast-diff-mcp
    ```
 
