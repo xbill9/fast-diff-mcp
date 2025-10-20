@@ -6,9 +6,9 @@ use similar::TextDiff;
 /// standard unified diff format. This is a high-performance implementation
 /// written in Rust.
 #[pyfunction]
-fn unified_diff(text1: String, text2: String) -> PyResult<String> {
-    let diff = TextDiff::from_lines(&text1, &text2);
-    let diff_output = diff.unified_diff().header("original", "modified").to_string();
+fn unified_diff(text1: &str, text2: &str) -> PyResult<String> {
+    let diff: TextDiff<'_, '_, '_, str> = TextDiff::from_lines(text1, text2);
+    let diff_output: String = diff.unified_diff().header("original", "modified").to_string();
     Ok(diff_output)
 }
 
@@ -23,7 +23,7 @@ mod tests {
     use super::*;
     #[test]
     fn it_works() {
-        let result = unified_diff("a\nb\n".to_string(), "a\nc\n".to_string()).unwrap();
+        let result: String = unified_diff("a\nb\n", "a\nc\n").unwrap();
         assert_eq!(result, "--- original\n+++ modified\n@@ -1,2 +1,2 @@\n a\n-b\n+c\n");
     }
 }

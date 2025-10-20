@@ -38,8 +38,8 @@ def diff_tool_python_difflib(original_text: str, modified_text: str) -> str:
 
 
 if __name__ == "__main__":
-    logger.info(f" MCP server started on port {os.getenv('PORT', 8080)}")
     logging.basicConfig(format="[%(levelname)s]: %(message)s", level=logging.INFO)
+    logger.info(f" MCP server started on port {os.getenv('PORT', 8080)}")
     asyncio.run(
         mcp.run_async(
             transport="streamable-http",
