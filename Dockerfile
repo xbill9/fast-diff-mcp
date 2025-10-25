@@ -21,7 +21,7 @@ RUN uv venv /opt/venv && \
 
 
 # ---- Stage 2: Final Production Image ----
-FROM python:3.13-slim
+FROM python:3.14-slim
 
 ENV PYTHONUNBUFFERED=1 \
     VIRTUAL_ENV=/opt/venv
